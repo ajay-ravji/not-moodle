@@ -1,0 +1,65 @@
+#courses {
+    display: grid;
+    width: 80%;
+    padding: 0 0 0 10%;
+    gap: 50px 50px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.course {
+    position: relative;
+    background-color: #ffffff;
+    height: 300px;
+    border: 1px solid black;
+}
+.course-header {
+    height: 60px;
+    width: 100%;
+    background-color: #d9d9d9;
+}
+.course-header > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.course-header > div > p {
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+.course-name-header {
+    margin: 0;
+    padding: 0 0 0 16px;
+    font-weight: bold;
+}
+.course-name {
+    margin: 0;
+    padding: 0 0 0 16px;
+}
+
+#course-name-input {
+    margin: 0 0 0 16px;
+}
+
+#course-add-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0 16px 16px 0;
+    padding: 4px 48px;
+    border: 0;
+    background-color: #6acc1f;
+    border-radius: 10px;
+}
+
+.course-delete-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    color: red;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0);
+}

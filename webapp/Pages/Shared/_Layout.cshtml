@@ -5,21 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - webapp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
     <link rel="stylesheet" href="~/webapp.styles.css" asp-append-version="true" />
     @RenderSection("styles", false)
 </head>
 <body>
     <div id="navbar">
-        <p id="navbar-title"> not Moodle </p>
-        <p id="navbar-login"> Login </p>
+        <a id="navbar-home" href="/"> not Moodle </a>
+        <a class="navbar-item" href="courses"> Courses </a>
+        <a id="navbar-login" href="login"> Login </a>
     </div>
     <p id="page-title"> @ViewData["ContentTitle"] </p>
     @RenderBody()
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @* <script src="~/js/site.js" asp-append-version="true"></script> *@
 
     @RenderSection("scripts", false)
 </body>

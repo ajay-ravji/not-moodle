@@ -18,7 +18,7 @@ async function renderCourses() {
             <button id="delete-button-${course.courseId}" class="course-delete-button"> X </button>
         </div>
         <p class="course-name-header"> Name </p>
-        <p class="course-name"> Course Name </p>
+        <p class="course-name"> ${course.name}  </p>
     </div>`;
     });
 

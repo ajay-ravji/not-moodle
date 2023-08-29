@@ -1,7 +1,6 @@
 #courses {
     display: grid;
-    width: 80%;
-    padding: 0 0 0 10%;
+    padding: 0 10% 0 10%;
     gap: 50px 50px;
     grid-template-columns: repeat(3, 1fr);
 }

@@ -1,0 +1,23 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Login";
+    ViewData["ContentTitle"] = "Login";
+}
+
+<div id="login-container">
+    <p> Username </p>
+    <input id="username-input" type="text">
+    <p> Password </p>
+    <input id="password-input" type="text">
+
+    <input type="button" runat="server" id="login-button" value="Login" onclick="handleLogin();">
+</div>
+
+@section styles {
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script src="~/js/login.js"></script>   
+}

@@ -12,13 +12,23 @@
     <div id="navbar">
         <a id="navbar-home" href="/"> not Moodle </a>
         <a class="navbar-item" href="courses"> Courses </a>
-        <a id="navbar-login" href="login"> Login </a>
+        <div id="navbar-right">
+        @if (User.Identity.IsAuthenticated) {
+            <p id="navbar-username"> @User.Identity.Name </p>
+            <div id="navbar-username-dropdown">
+                <a id="navbar-logout" href="javascript:logout()"> Logout </a>
+            </div>
+        } else {
+            <a href="login"> Login </a>
+        }
+        </div>
     </div>
     <p id="page-title"> @ViewData["ContentTitle"] </p>
     @RenderBody()
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
 
     @RenderSection("scripts", false)
 </body>

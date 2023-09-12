@@ -17,12 +17,18 @@
     text-decoration: none;
 }
 
-#navbar-login {
+#navbar-right {
     margin-left: auto;
     padding: 13px 16px 13px 8px !important;
 }
 #navbar-home {
     padding: 13px 16px 13px 16px !important;
+}
+
+#navbar-username-dropdown {
+    display: block;
+    position: absolute;
+    padding: 13px 8px 13px 8px;
 }
 
 #page-title {

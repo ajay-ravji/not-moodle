@@ -4,6 +4,8 @@ class DatabaseContext : DbContext {
     public DbSet<Course> Courses { get; set; }
     public DbSet<User> Users { get; set; }
 
+    public DbSet<Lecturer> Lecturer {get; set;}
+
     public DatabaseContext() {}
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {

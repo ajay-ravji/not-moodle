@@ -40,6 +40,25 @@ app.MapPost("/api/course/create", (HttpRequest request) => {
     context.SaveChanges();
 });
 
+app.MapPost("/api/lecturer/add", (HttpRequest request) => {
+    string lecturerId1 = request.Form["lecturerId"];
+    string LecturerName = request.Form["lecturerName"];
+    string courseName = request.Form["courseName"];
+
+    if (lecturerId1 == null) return;
+        if (LecturerName == null) return;
+
+    if (courseName == null) return;
+
+
+    DatabaseContext context = new DatabaseContext();
+    Lecturer lec = new Lecturer();
+    lec.courses
+    context.Add(new Lecturer{ LecturerId = lecturerId1 , courses = });
+    context.SaveChanges();
+});
+
+
 app.MapGet("/api/course/all", (HttpRequest request) => {
     DatabaseContext context = new DatabaseContext();
     return context.Courses;

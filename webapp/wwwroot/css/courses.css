@@ -6,15 +6,24 @@
 }
 
 .course {
+    display: flexbox;
     position: relative;
     background-color: #ffffff;
     height: 300px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
+    transition: 0.3s;
+    border-radius: 10px;
+}
+.course:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
 }
 .course-header {
     height: 60px;
     width: 100%;
     background-color: #d9d9d9;
+    box-shadow: rgba(44, 134, 187, 0.2) 0 -25px 18px -14px inset,rgba(28, 42, 120, 0.15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+    border-radius: 10px 10px 0 0;
 }
 .course-header > div {
     width: 100%;
@@ -43,16 +52,28 @@
 }
 
 #course-add-button {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin: 0 16px 16px 0;
-    padding: 4px 48px;
-    border: 0;
-    background-color: #6acc1f;
-    border-radius: 10px;
-}
-
+        background-color: #c2e4fb;
+        border-radius: 100px;
+        box-shadow: rgba(27, 56, 124, 0.2) 0 -25px 18px -14px inset,rgba(40, 76, 160, 0.15) 0 1px 2px,rgba(47, 47, 148, 0.15) 0 2px 4px,rgba(44, 113, 187, 0.15) 0 4px 8px,rgba(44, 113, 187, 0.15) 0 8px 16px,rgba(44, 80, 187, 0.15) 0 16px 32px;
+        color: rgb(0, 68, 128);
+        cursor: pointer;
+        font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+        padding: 7px 20px;
+        text-align: center;
+        margin-left: 175px;
+        text-decoration: none;
+        transition: all 250ms;
+        border: 0;
+        font-size: 16px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+      
+      .course-add-button:hover {
+        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+        transform: scale(1.05) rotate(-1deg);
+      }
 .course-delete-button {
     position: absolute;
     top: 0;

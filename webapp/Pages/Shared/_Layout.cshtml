@@ -4,12 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - webapp</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+=======
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+>>>>>>> bf2176929194f9a740ba2be1bd4ebd1178e6d228
     <link rel="stylesheet" href="~/webapp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     @RenderSection("styles", false)
 </head>
 <body>
     <div id="navbar">
+<<<<<<< HEAD
         <a id="navbar-home" href="/"> not Moodle </a>
         <a class="navbar-item" href="courses"> Courses </a>
         <div id="navbar-right">
@@ -22,12 +28,32 @@
             <a href="login"> Login </a>
         }
         </div>
+=======
+        <a class="navbar-left" href="/"> not Moodle </a>
+        <a class="navbar-left" href="/courses"> Courses </a>
+        @if (User.Identity.IsAuthenticated) {
+            <div class="navbar-right" id="dropdown">
+                <button id="dropbtn"> @User.Identity.Name
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div id="dropdown-content">
+                    <a href="javascript:logout()"> Logout </a>
+                </div>
+            </div>
+        } else {
+            <a class="navbar-right" href="login"> Login </a>
+        }
+>>>>>>> bf2176929194f9a740ba2be1bd4ebd1178e6d228
     </div>
     <p id="page-title"> @ViewData["ContentTitle"] </p>
     @RenderBody()
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<<<<<<< HEAD
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+=======
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
+>>>>>>> bf2176929194f9a740ba2be1bd4ebd1178e6d228
     <script src="~/js/site.js"></script>
 
     @RenderSection("scripts", false)

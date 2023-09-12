@@ -20,7 +20,11 @@
     padding: 0 0 0 8px;
     border: 1px solid #a0a0a0;
     border-radius: 10px;
+<<<<<<< HEAD
     /* box-sizing: border-box; */
+=======
+    height: 25px;
+>>>>>>> bf2176929194f9a740ba2be1bd4ebd1178e6d228
 }
 
 #login-button {
@@ -30,7 +34,11 @@
     margin: 0 16px 16px 0;
     border: 0;
     border-radius: 10px;
+<<<<<<< HEAD
     padding: 4px 32px;
+=======
+    padding: 8px 40px;
+>>>>>>> bf2176929194f9a740ba2be1bd4ebd1178e6d228
     background-color: #323232;
     color: #ffffff;
     font-weight: bold;

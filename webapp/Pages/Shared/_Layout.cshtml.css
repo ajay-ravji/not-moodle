@@ -1,11 +1,10 @@
 ﻿#navbar {
     background-color: #090909;
     width: 100%;
-
-    display: flex;
-    align-items: center;
+    overflow: hidden;
 }
 
+<<<<<<< HEAD
 .navbar-item {
     padding: 0 0 0 16px;
 }
@@ -29,6 +28,61 @@
     display: block;
     position: absolute;
     padding: 13px 8px 13px 8px;
+=======
+#navbar a {
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#dropdown {
+    overflow: hidden;
+}
+
+.navbar-right {
+    float: right;
+}
+.navbar-left {
+    float: left;
+}
+
+#dropdown #dropbtn {
+    color: #ffffff;
+    font-size: 16px;
+    width: 150px;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+#dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #292929;
+    z-index: 1;
+}
+
+#dropdown-content a {
+    width: 150px;
+    float: none;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+  
+#dropdown:hover #dropdown-content {
+    display: block;
+}
+
+#navbar a:hover, #dropdown:hover #dropbtn {
+    background-color: #292929;
+>>>>>>> bf2176929194f9a740ba2be1bd4ebd1178e6d228
 }
 
 #page-title {

@@ -90,7 +90,11 @@ app.MapPost("/api/auth/login", async (HttpContext context, HttpRequest request) 
 
     var claims = new List<Claim>{
         new Claim("id", user.UserId.ToString()),
+<<<<<<< HEAD
         new Claim(ClaimTypes.Name, "test name")
+=======
+        new Claim(ClaimTypes.Name, user.UserName)
+>>>>>>> bf2176929194f9a740ba2be1bd4ebd1178e6d228
     };
 
     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

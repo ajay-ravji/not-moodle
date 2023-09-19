@@ -31,26 +31,25 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 
-app.MapPost("/api/course/create", (HttpRequest request) => {
-    string courseName = request.Form["name"];
-    if (courseName == null) return;
+app.MapPost("/api/course/create", async (HttpRequest request) => {
+    var body = new StreamReader(request.Body);
+    var json = JsonSerializer.Deserialize<Dictionary<string, string>>(await body.ReadToEndAsync());
+
+    if (json["name"] == null) return;
 
     DatabaseContext context = new DatabaseContext();
-    context.Add(new Course{ Name = courseName });
+    context.Add(new Course{ Name = json["name"] });
     context.SaveChanges();
 });
 
-app.MapGet("/api/course/all", (HttpRequest request) => {
-    DatabaseContext context = new DatabaseContext();
-    return context.Courses;
-});
+app.MapDelete("/api/course/delete", async (HttpRequest request) => {
+    var body = new StreamReader(request.Body);
+    var json = JsonSerializer.Deserialize<Dictionary<string, string>>(await body.ReadToEndAsync());
 
-app.MapDelete("/api/course/delete", (HttpRequest request) => {
-    string courseIdStr = request.Query["id"];
-    if (courseIdStr == null) return;
+    if (json["id"] == null) return;
 
     int courseId;
-    if (!Int32.TryParse(courseIdStr, out courseId)) return;
+    if (!Int32.TryParse(json["id"], out courseId)) return;
 
     DatabaseContext context = new DatabaseContext();
     Course course = context.Courses.Where(x => x.CourseId == courseId).ToList()[0];

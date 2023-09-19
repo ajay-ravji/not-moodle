@@ -14,10 +14,6 @@ public class CourseModel : PageModel {
 
     public void OnGet() {
         DatabaseContext context = new DatabaseContext();
-        // context.Add(new Course{ Name = "Tesdasdsadt "});
-        // context.SaveChanges();
-
         CourseList = context.Courses.ToList();
     }
 }
-

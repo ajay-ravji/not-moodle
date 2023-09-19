@@ -1,14 +1,19 @@
+body{
+    background-image: url('../images/hex-background.jpg'); 
+}
+
 #courses {
     display: grid;
     padding: 0 10% 0 10%;
     gap: 50px 50px;
     grid-template-columns: repeat(3, 1fr);
+    z-index: 0;
 }
 
 .course {
     display: flexbox;
     position: relative;
-    background-color: #ffffff;
+    background-color: #d3d3d3;
     height: 300px;
     /* border: 1px solid black; */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
@@ -16,14 +21,14 @@
     border-radius: 10px;
 }
 .course:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
+    box-shadow: 0 4px 12px 0 rgba(228, 224, 224, 0.972);
 }
 .course-header {
     height: 60px;
     width: 100%;
-    background-color: #d9d9d9;
-    box-shadow: rgba(44, 134, 187, 0.2) 0 -25px 18px -14px inset,rgba(28, 42, 120, 0.15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+    background-color: #f6f6f6;
     border-radius: 10px 10px 0 0;
+    color:#060606;
 }
 .course-header > div {
     width: 100%;
@@ -54,9 +59,9 @@
 #course-add-button {
         background-color: #c2e4fb;
         border-radius: 100px;
-        box-shadow: rgba(27, 56, 124, 0.2) 0 -25px 18px -14px inset,rgba(40, 76, 160, 0.15) 0 1px 2px,rgba(47, 47, 148, 0.15) 0 2px 4px,rgba(44, 113, 187, 0.15) 0 4px 8px,rgba(44, 113, 187, 0.15) 0 8px 16px,rgba(44, 80, 187, 0.15) 0 16px 32px;
         color: rgb(0, 68, 128);
         cursor: pointer;
+        font-weight: bold;
         font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
         padding: 7px 20px;
         text-align: center;
@@ -69,7 +74,6 @@
         -webkit-user-select: none;
         touch-action: manipulation;
       }
-      
       .course-add-button:hover {
         box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
         transform: scale(1.05) rotate(-1deg);
@@ -79,7 +83,7 @@
     top: 0;
     right: 0;
     border: 0;
-    color: red;
+    color: #000000;
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0);
 }

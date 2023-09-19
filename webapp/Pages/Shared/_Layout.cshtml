@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - webapp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/webapp.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     @RenderSection("styles", false)
 </head>
 <body>
@@ -23,6 +24,10 @@
         }
         </div>
     </div>
+    <div class="not-moodle"></div>
+        <div id="backdrop-image">
+        <img src="/images/Not-Moodle-transparent.png">
+    </div>
     <p id="page-title"> @ViewData["ContentTitle"] </p>
     @RenderBody()
 
@@ -31,5 +36,6 @@
     <script src="~/js/site.js"></script>
 
     @RenderSection("scripts", false)
+
 </body>
 </html>

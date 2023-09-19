@@ -34,6 +34,24 @@
 #page-title {
     margin: 0;
     font-weight: bold;
-    font-size: 64px;
+    font-size: 84px;
     text-align: center;
+    color: #ffffff;
+    padding-bottom: 50px;
+}
+.not-moodle{
+    justify-content: center;
+}
+body{
+    background-image: url('../images/hex-background.jpg'); 
+    
+}
+
+#backdrop-image {
+    display: grid;
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto;
+    z-index: -1;
 }

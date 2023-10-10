@@ -4,10 +4,20 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using System.Web;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie();
+    .AddCookie(options => {
+        options.Events.OnRedirectToAccessDenied = options.Events.OnRedirectToLogin = context => {
+            context.Response.StatusCode = (int)(HttpStatusCode.Unauthorized);
+            return Task.CompletedTask;
+        };
+    });
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("lecturer", policy => policy.RequireRole("lecturer"));
+});
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -40,7 +50,7 @@ app.MapPost("/api/course/create", async (HttpRequest request) => {
     DatabaseContext context = new DatabaseContext();
     context.Add(new Course{ Name = json["name"] });
     context.SaveChanges();
-});
+}).RequireAuthorization("lecturer");
 
 app.MapDelete("/api/course/delete", async (HttpRequest request) => {
     var body = new StreamReader(request.Body);
@@ -55,7 +65,7 @@ app.MapDelete("/api/course/delete", async (HttpRequest request) => {
     Course course = context.Courses.Where(x => x.CourseId == courseId).ToList()[0];
     context.Courses.Remove(course);
     context.SaveChanges();
-});
+}).RequireAuthorization("lecturer");
 
 app.MapPost("/api/auth/login", async (HttpContext context, HttpRequest request) => {
     var body = new StreamReader(request.Body);
@@ -70,7 +80,8 @@ app.MapPost("/api/auth/login", async (HttpContext context, HttpRequest request) 
 
     var claims = new List<Claim>{
         new Claim("id", user.UserId.ToString()),
-        new Claim(ClaimTypes.Name, user.UserName)
+        new Claim(ClaimTypes.Name, user.UserName),
+        new Claim(ClaimTypes.Role, user.Role),
     };
 
     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

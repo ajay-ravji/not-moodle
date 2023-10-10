@@ -4,10 +4,27 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using System.Web;
+<<<<<<< HEAD
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie();
+=======
+using System.Net;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options => {
+        options.Events.OnRedirectToAccessDenied = options.Events.OnRedirectToLogin = context => {
+            context.Response.StatusCode = (int)(HttpStatusCode.Unauthorized);
+            return Task.CompletedTask;
+        };
+    });
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("lecturer", policy => policy.RequireRole("lecturer"));
+});
+
+>>>>>>> main
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -31,31 +48,62 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 
-app.MapPost("/api/course/create", (HttpRequest request) => {
-    string courseName = request.Form["name"];
-    if (courseName == null) return;
+app.MapPost("/api/course/create", async (HttpRequest request) => {
+    var body = new StreamReader(request.Body);
+    var json = JsonSerializer.Deserialize<Dictionary<string, string>>(await body.ReadToEndAsync());
+
+    if (json["name"] == null) return;
 
     DatabaseContext context = new DatabaseContext();
-    context.Add(new Course{ Name = courseName });
+    context.Add(new Course{ Name = json["name"] });
     context.SaveChanges();
-});
+}).RequireAuthorization("lecturer");
 
-app.MapGet("/api/course/all", (HttpRequest request) => {
-    DatabaseContext context = new DatabaseContext();
-    return context.Courses;
-});
+app.MapDelete("/api/course/delete", async (HttpRequest request) => {
+    var body = new StreamReader(request.Body);
+    var json = JsonSerializer.Deserialize<Dictionary<string, string>>(await body.ReadToEndAsync());
 
-app.MapDelete("/api/course/delete", (HttpRequest request) => {
-    string courseIdStr = request.Query["id"];
-    if (courseIdStr == null) return;
+    if (json["id"] == null) return;
 
     int courseId;
-    if (!Int32.TryParse(courseIdStr, out courseId)) return;
+    if (!Int32.TryParse(json["id"], out courseId)) return;
 
     DatabaseContext context = new DatabaseContext();
     Course course = context.Courses.Where(x => x.CourseId == courseId).ToList()[0];
     context.Courses.Remove(course);
     context.SaveChanges();
+}).RequireAuthorization("lecturer");
+
+app.MapPost("/api/auth/login", async (HttpContext context, HttpRequest request) => {
+    var body = new StreamReader(request.Body);
+    var json = JsonSerializer.Deserialize<Dictionary<string, string>>(await body.ReadToEndAsync());
+
+    DatabaseContext dbContext = new DatabaseContext();
+    var users = dbContext.Users.Where(x => x.UserName == json["username"]).ToList();
+    if (users.Count == 0) return Results.StatusCode(400);
+
+    User user = users[0];
+    if (user.Password != json["password"]) return Results.StatusCode(400);
+
+    var claims = new List<Claim>{
+        new Claim("id", user.UserId.ToString()),
+        new Claim(ClaimTypes.Name, user.UserName),
+        new Claim(ClaimTypes.Role, user.Role),
+    };
+
+    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+    await context.SignInAsync(
+        CookieAuthenticationDefaults.AuthenticationScheme,
+        new ClaimsPrincipal(claimsIdentity),
+        new AuthenticationProperties{}
+    );
+    return Results.StatusCode(200);
+});
+
+app.MapPost("/api/auth/logout", async (HttpContext context, HttpRequest request) => {
+    await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+    return Results.StatusCode(200);
 });
 
 app.MapPost("/api/auth/login", async (HttpContext context, HttpRequest request) => {

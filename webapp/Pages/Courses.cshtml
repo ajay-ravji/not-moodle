@@ -1,4 +1,6 @@
-﻿@page
+﻿
+@page
+@using System.Security.Claims
 @model CourseModel
 @{
     ViewData["Title"] = "Courses";
@@ -6,6 +8,33 @@
 }
 
 <div id="courses">
+    @foreach (var course in @Model.CourseList) {
+        <div class="course">
+            <div class="course-header">
+                <div>
+                    <p> @course.Name </p>
+                </div>
+                @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
+                    <input type="button" class="course-delete-button" onclick="deleteCourse(@course.CourseId)" value="X">
+                }
+            </div>
+            <p class="course-name-header"> Name </p>
+            <p class="course-name"> @course.Name </p>
+        </div>
+    }
+
+    @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
+        <div class="course">
+            <div class="course-header">
+                <div>
+                    <p> Add new course </p>
+                </div>
+            </div>
+            <p class="course-name-header"> Name </p>
+            <input id="course-name-input" name="name">
+            <button id="course-add-button" onclick="createNewCourse()"> Add </button>
+        </div>
+    }
 </div>
 
 @section styles {

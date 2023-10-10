@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 async function renderCourses() {
     let response = await fetch('/api/course/all');
     if (!response.ok) return;
@@ -20,33 +21,19 @@ async function renderCourses() {
         <p class="course-name-header"> Name </p>
         <p class="course-name"> ${course.name}  </p>
     </div>`;
+=======
+async function deleteCourse(id) {
+    await fetch(`/api/course/delete`, {
+        method: "DELETE",
+        headers: {
+            "Content-type": "application/json;"
+        },
+        body: JSON.stringify({
+            "id": id.toString()
+        })
+>>>>>>> main
     });
-
-    coursesElement.innerHTML += `<div class="course">
-        <div class="course-header">
-            <div>
-                <p> Add new course </p>
-            </div>
-        </div>
-        <p class="course-name-header"> Name </p>
-        <input id="course-name-input" name="name">
-        <button id="course-add-button" onclick="createNewCourse();"> Add </button>
-    </div>`;
-
-    courses.forEach(course => {
-        let deleteButton = document.getElementById(`delete-button-${course.courseId}`);
-        
-        deleteButton.onclick = async () => {
-            await fetch(`/api/course/delete?id=${course.courseId}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            });
-
-            window.location.reload();
-        };
-    })
+    location.reload();
 }
 
 async function createNewCourse() {
@@ -54,12 +41,15 @@ async function createNewCourse() {
 
     let response = await fetch("/api/course/create", {
         method: "POST",
-        body: new URLSearchParams({name: courseName})
+        headers: {
+            "Content-type": "application/json;"
+        },
+        body: JSON.stringify({
+            "name": courseName
+        })
     });
 
     if (response.ok) {
         location.reload();
     }
 }
-
-renderCourses();

@@ -5,3 +5,9 @@ body {
     margin: 0;
     background-image: url('./../images/hex-background.jpg'); 
 }
+#form-message {
+    color: Red;
+}
+.hidden {
+    visibility: none;
+}

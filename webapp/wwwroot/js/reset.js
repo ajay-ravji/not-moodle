@@ -1,8 +1,8 @@
-async function handleLogin() {
+async function handleReset() {
     let username = document.getElementById("username-input").value;
     let password = document.getElementById("password-input").value;
 
-    let response = await fetch(`/api/auth/login`, {
+    let response = await fetch(`/api/auth/reset`, {
         method: "POST",
         headers: {
             "Content-type": "application/json"
@@ -13,11 +13,12 @@ async function handleLogin() {
         })
     });
 
+    let errorMessage = document.getElementById("form-message");
+    errorMessage.classList.remove("hidden");
+
     if (response.ok) {
-        window.location = "/";
+        errorMessage.innerHTML = "Reset successful";
     } else {
-        let errorMessage = document.getElementById("form-message");
-        errorMessage.classList.remove("hidden");
         errorMessage.innerHTML = "Unknown error";
     }
 }

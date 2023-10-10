@@ -44,31 +44,38 @@ app.MapPost("/api/course/create", async (HttpRequest request) => {
     var body = new StreamReader(request.Body);
     var json = JsonSerializer.Deserialize<Dictionary<string, string>>(await body.ReadToEndAsync());
 
-    if (json["name"] == null) return;
+    if (json["name"] == null) return Results.StatusCode(400);
 
     DatabaseContext context = new DatabaseContext();
     context.Add(new Course{ Name = json["name"] });
     context.SaveChanges();
+
+    return Results.StatusCode(200);
 }).RequireAuthorization("lecturer");
 
 app.MapDelete("/api/course/delete", async (HttpRequest request) => {
     var body = new StreamReader(request.Body);
     var json = JsonSerializer.Deserialize<Dictionary<string, string>>(await body.ReadToEndAsync());
 
-    if (json["id"] == null) return;
+    if (json["id"] == null) return Results.StatusCode(400);
 
     int courseId;
-    if (!Int32.TryParse(json["id"], out courseId)) return;
+    if (!Int32.TryParse(json["id"], out courseId)) return Results.StatusCode(400);;
 
     DatabaseContext context = new DatabaseContext();
     Course course = context.Courses.Where(x => x.CourseId == courseId).ToList()[0];
     context.Courses.Remove(course);
     context.SaveChanges();
+
+    return Results.StatusCode(200);
 }).RequireAuthorization("lecturer");
 
 app.MapPost("/api/auth/login", async (HttpContext context, HttpRequest request) => {
     var body = new StreamReader(request.Body);
     var json = JsonSerializer.Deserialize<Dictionary<string, string>>(await body.ReadToEndAsync());
+
+    if (json["username"] == null) return Results.StatusCode(400);
+    if (json["password"] == null) return Results.StatusCode(400);
 
     DatabaseContext dbContext = new DatabaseContext();
     var users = dbContext.Users.Where(x => x.UserName == json["username"]).ToList();
@@ -98,5 +105,22 @@ app.MapPost("/api/auth/logout", async (HttpContext context, HttpRequest request)
     return Results.StatusCode(200);
 });
 
+app.MapPost("/api/auth/reset", async (HttpRequest request) => {
+    var body = new StreamReader(request.Body);
+    var json = JsonSerializer.Deserialize<Dictionary<string, string>>(await body.ReadToEndAsync());
+    
+    if (json["username"] == null) return Results.StatusCode(400);
+    if (json["password"] == null) return Results.StatusCode(400);
+
+    DatabaseContext dbContext = new DatabaseContext();
+    var users = dbContext.Users.Where(x => x.UserName == json["username"]).ToList();
+    if (users.Count == 0) return Results.StatusCode(400);
+
+    User user = users[0];
+    user.Password = json["password"];
+    dbContext.SaveChanges();
+
+    return Results.StatusCode(200);
+});
 
 app.Run();

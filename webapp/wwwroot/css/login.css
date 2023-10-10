@@ -7,12 +7,14 @@
     border: 1px solid #a0a0a0;
     padding: 16px 0 0 0;
     border-radius: 10px;
-    box-shadow: 5px 10px #444444;
+    box-shadow: 2px 5px #32309c24;
+    background-color: #ffffff;
 }
 
 #login-container > p {
     font-weight: bold;
     margin: 0 0 0 16px;
+   
 }
 
 #login-container > input[type=text] {
@@ -34,6 +36,7 @@
     background-color: #323232;
     color: #ffffff;
     font-weight: bold;
+    text-decoration: none;
 }
 
 #login-button:hover {

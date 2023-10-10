@@ -12,9 +12,12 @@
 #navbar > a {
     padding: 13px 8px 13px 8px;
     display: inline-block;
+    
+}
+#navbar a {
     color: #ffffff;
-    font-weight: bold;
     text-decoration: none;
+    font-weight: bold;
 }
 
 #navbar-right {

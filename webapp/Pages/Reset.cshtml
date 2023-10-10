@@ -1,0 +1,28 @@
+﻿
+@page
+@using System.Security.Claims
+@model ResetModel
+@{
+    ViewData["Title"] = "Reset Password";
+    ViewData["ContentTitle"] = "Reset Password";
+}
+
+<div id="reset-container">
+    <p class="label"> Username </p>
+    <input id="username-input" type="text">
+    <p class="label"> Password </p>
+    <input id="password-input" type="text">
+
+    <input type="button" id="reset-button" value="Reset" onclick="handleReset();">
+
+    <p id="form-message" class="hidden"></p>
+    
+</div>
+
+@section styles {
+    <link rel="stylesheet" href="~/css/reset.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script src="~/js/reset.js"></script>   
+}

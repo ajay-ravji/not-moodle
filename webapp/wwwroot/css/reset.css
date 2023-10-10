@@ -1,4 +1,4 @@
-#login-container {
+#reset-container {
     position: relative;
     width: 400px;
     height: 200px;
@@ -10,21 +10,22 @@
     background-color: #ffffff;
 }
 
-#login-container > p {
+#reset-container > p {
     margin: 0 0 0 16px;
 }
-#login-container .label {
+
+#reset-container .label {
     font-weight: bold;
 }
 
-#login-container > input[type=text] {
+#reset-container > input[type=text] {
     margin: 0 0 16px 16px;
     padding: 4px 0 4px 8px;
     border: 1px solid #a0a0a0;
     border-radius: 10px;
 }
 
-#login-button {
+#reset-button {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -37,6 +38,7 @@
     font-weight: bold;
 }
 
-#login-button:hover {
+#reset-button:hover {
     background-color: #626262;
 }
+

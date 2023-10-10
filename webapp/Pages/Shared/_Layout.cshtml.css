@@ -4,16 +4,23 @@
     overflow: hidden;
 }
 
+.navbar-item {
+    padding: 0 0 0 16px;
+}
+#navbar > a {
+    padding: 13px 8px 13px 8px;
+    display: inline-block;
+    
+}
 #navbar a {
     color: #ffffff;
-    font-size: 16px;
-    text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
+    font-weight: bold;
 }
 
-#dropdown {
-    overflow: hidden;
+#navbar-right {
+    margin-left: auto;
+    padding: 13px 16px 13px 8px !important;
 }
 
 .navbar-right {
@@ -59,9 +66,33 @@
     background-color: #292929;
 }
 
+#navbar-username-dropdown {
+    display: block;
+    position: absolute;
+    padding: 13px 8px 13px 8px;
+}
+
 #page-title {
     margin: 0;
     font-weight: bold;
-    font-size: 64px;
+    font-size: 84px;
     text-align: center;
+    color: #ffffff;
+    padding-bottom: 50px;
+}
+.not-moodle{
+    justify-content: center;
+}
+body{
+    background-image: url('../images/hex-background.jpg'); 
+    
+}
+
+#backdrop-image {
+    display: grid;
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto;
+    z-index: -1;
 }

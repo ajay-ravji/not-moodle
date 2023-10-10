@@ -26,6 +26,10 @@
             <a class="navbar-right" href="login"> Login </a>
         }
     </div>
+    <div class="not-moodle"></div>
+        <div id="backdrop-image">
+        <img src="/images/Not-Moodle-transparent.png">
+    </div>
     <p id="page-title"> @ViewData["ContentTitle"] </p>
     @RenderBody()
 
@@ -34,5 +38,6 @@
     <script src="~/js/site.js"></script>
 
     @RenderSection("scripts", false)
+
 </body>
 </html>

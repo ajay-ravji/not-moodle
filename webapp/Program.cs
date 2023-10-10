@@ -18,7 +18,6 @@ builder.Services.AddAuthorization(options => {
     options.AddPolicy("lecturer", policy => policy.RequireRole("lecturer"));
 });
 
-
 // Add services to the container.
 builder.Services.AddRazorPages();
 

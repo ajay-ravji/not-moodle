@@ -11,18 +11,20 @@
 </head>
 <body>
     <div id="navbar">
-        <a id="navbar-home" href="/"> not Moodle </a>
-        <a class="navbar-item" href="courses"> Courses </a>
-        <div id="navbar-right">
+        <a class="navbar-left" href="/"> not Moodle </a>
+        <a class="navbar-left" href="/courses"> Courses </a>
         @if (User.Identity.IsAuthenticated) {
-            <p id="navbar-username"> @User.Identity.Name </p>
-            <div id="navbar-username-dropdown">
-                <a id="navbar-logout" href="javascript:logout()"> Logout </a>
+            <div class="navbar-right" id="dropdown">
+                <button id="dropbtn"> @User.Identity.Name
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div id="dropdown-content">
+                    <a href="javascript:logout()"> Logout </a>
+                </div>
             </div>
         } else {
-            <a href="login"> Login </a>
+            <a class="navbar-right" href="login"> Login </a>
         }
-        </div>
     </div>
     <div class="not-moodle"></div>
         <div id="backdrop-image">

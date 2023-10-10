@@ -1,7 +1,7 @@
 html {
-  font-family: sans-serif;
+    font-family: sans-serif;
 }
 body {
-  margin-bottom: 60px;
-  background-image: url('./../images/hex-background.jpg'); 
+    margin: 0;
+    background-image: url('./../images/hex-background.jpg'); 
 }

@@ -4,12 +4,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using System.Web;
-<<<<<<< HEAD
-
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie();
-=======
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,8 +17,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddAuthorization(options => {
     options.AddPolicy("lecturer", policy => policy.RequireRole("lecturer"));
 });
-
->>>>>>> main
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -89,37 +81,6 @@ app.MapPost("/api/auth/login", async (HttpContext context, HttpRequest request) 
         new Claim("id", user.UserId.ToString()),
         new Claim(ClaimTypes.Name, user.UserName),
         new Claim(ClaimTypes.Role, user.Role),
-    };
-
-    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-    await context.SignInAsync(
-        CookieAuthenticationDefaults.AuthenticationScheme,
-        new ClaimsPrincipal(claimsIdentity),
-        new AuthenticationProperties{}
-    );
-    return Results.StatusCode(200);
-});
-
-app.MapPost("/api/auth/logout", async (HttpContext context, HttpRequest request) => {
-    await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-    return Results.StatusCode(200);
-});
-
-app.MapPost("/api/auth/login", async (HttpContext context, HttpRequest request) => {
-    var body = new StreamReader(request.Body);
-    var json = JsonSerializer.Deserialize<Dictionary<string, string>>(await body.ReadToEndAsync());
-
-    DatabaseContext dbContext = new DatabaseContext();
-    var users = dbContext.Users.Where(x => x.UserName == json["username"]).ToList();
-    if (users.Count == 0) return Results.StatusCode(400);
-
-    User user = users[0];
-    if (user.Password != json["password"]) return Results.StatusCode(400);
-
-    var claims = new List<Claim>{
-        new Claim("id", user.UserId.ToString()),
-        new Claim(ClaimTypes.Name, "test name")
     };
 
     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

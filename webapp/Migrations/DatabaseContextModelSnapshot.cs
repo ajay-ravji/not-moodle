@@ -28,6 +28,10 @@ namespace webapp.Migrations
                     b.Property<int>("LecturerId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("ClassId");
 
                     b.HasIndex("CourseId");
@@ -112,6 +116,10 @@ namespace webapp.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
                         .IsRequired()

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace webapp.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230919030151_InitialCreate")]
+    [Migration("20231016222303_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -30,6 +30,10 @@ namespace webapp.Migrations
 
                     b.Property<int>("LecturerId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ClassId");
 
@@ -115,6 +119,10 @@ namespace webapp.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
                         .IsRequired()

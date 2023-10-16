@@ -1,0 +1,67 @@
+
+@page
+@using System.Security.Claims
+@model ClassModel
+@{
+    ViewData["Title"] = "Courses";
+    ViewData["ContentTitle"] = "Courses";
+}
+
+<div id="courses">
+    @foreach (var class_ in @Model.ClassList) {
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <p> @class_.Name </p>
+                </div>
+            </div>
+            <p class="card-field-header"> Course </p>
+            <p class="card-field"> @class_.Course.Name </p>
+            <p class="card-field-header"> Lecturer </p>
+            <p class="card-field"> @class_.Lecturer.Name </p>
+
+            <div class="card-controls">
+                @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
+                    <button class="card-delete-button" onclick="deleteClass(@class_.ClassId)"> Delete </button>
+                }
+            </div>
+        </div>
+    }
+
+    @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <p> Add new class </p>
+                </div>
+            </div>
+            <p class="card-field-header"> Name </p>
+            <input id="class-name-input" class="card-field-input" name="name">
+            <p class="card-field-header"> Course </p>
+            <select id="class-course-input" class="card-field-input">
+                @foreach (var course in @Model.CourseList) {
+                    <option value="@course.CourseId"> @course.Name </option>
+                }
+            </select>
+            <p class="card-field-header"> Lecturer </p>
+            <select id="class-lecturer-input" class="card-field-input">
+                @foreach (var lecturer in @Model.LecturerList) {
+                    <option value="@lecturer.UserId"> @lecturer.Name </option>
+                }
+            </select>
+
+            <div class="card-controls">
+                <button class="card-add-button" onclick="createNewClass()"> Add </button>
+            </div>
+        </div>
+    }
+</div>
+
+@section styles {
+    <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/courses.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script src="~/js/classes.js"></script>   
+}

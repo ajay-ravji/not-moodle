@@ -1,7 +1,3 @@
-body{
-    background-image: url('../images/hex-background.jpg'); 
-}
-
 #courses {
     display: grid;
     padding: 0 10% 0 10%;
@@ -10,80 +6,90 @@ body{
     z-index: 0;
 }
 
-.course {
-    display: flexbox;
+.card {
     position: relative;
     background-color: #d3d3d3;
     height: 300px;
-    /* border: 1px solid black; */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
     transition: 0.3s;
     border-radius: 10px;
 }
-.course:hover{
+.card:hover{
     box-shadow: 0 4px 12px 0 rgba(228, 224, 224, 0.972);
 }
-.course-header {
+
+.card-header {
     height: 60px;
     width: 100%;
     background-color: #f6f6f6;
     border-radius: 10px 10px 0 0;
     color:#060606;
 }
-.course-header > div {
+.card-header > div {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.course-header > div > p {
+.card-header > div > p {
     font-weight: bold;
     text-align: center;
     margin: 0;
 }
-.course-name-header {
-    margin: 0;
+.card-field-header {
+    margin: 8px 0 0 0;
     padding: 0 0 0 16px;
     font-weight: bold;
 }
-.course-name {
+.card-field {
     margin: 0;
     padding: 0 0 0 16px;
 }
 
-#course-name-input {
+.card-field-input {
     margin: 0 0 0 16px;
+    padding: 4px 0 4px 8px;
+    border: 1px solid #a0a0a0;
+    border-radius: 10px;
 }
 
-#course-add-button {
-        background-color: #c2e4fb;
-        border-radius: 100px;
-        color: rgb(0, 68, 128);
-        cursor: pointer;
-        font-weight: bold;
-        font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-        padding: 7px 20px;
-        text-align: center;
-        margin-left: 175px;
-        text-decoration: none;
-        transition: all 250ms;
-        border: 0;
-        font-size: 16px;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-      }
-      .course-add-button:hover {
-        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
-        transform: scale(1.05) rotate(-1deg);
-      }
-.course-delete-button {
+.card-controls {
+    display: flex;
+    gap: 0 8px;
     position: absolute;
-    top: 0;
-    right: 0;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 16px;
+}
+
+.card-add-button {
     border: 0;
-    color: #000000;
+    padding: 7px 20px;
+    background-color: #41bf61;
+    border-radius: 100px;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: sans-serif;
     font-weight: bold;
-    background-color: rgba(0, 0, 0, 0);
+    flex: 0 1 50%;
+}
+.card-add-button:hover {
+    background-color: #44c966;
+}
+
+.card-delete-button {
+    border: 0;
+    flex: 0 1 50%;
+    background-color: #e34d4d;
+    border-radius: 100px;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+.card-delete-button:hover {
+    background-color: #ed5151;
 }

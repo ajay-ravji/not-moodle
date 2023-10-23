@@ -1,14 +1,16 @@
 
 @page
 @using System.Security.Claims
-@model ClassModel
+@model ClassesModel
 @{
-    ViewData["Title"] = "Courses";
-    ViewData["ContentTitle"] = "Courses";
+    ViewData["Title"] = "Classes";
+    ViewData["ContentTitle"] = "Classes";
 }
 
-<div id="courses">
-    @foreach (var class_ in @Model.ClassList) {
+<div id="classes">
+    @for (int i = 0; i < @Model.ClassList.Count(); i++) {
+        var class_ = @Model.ClassList[i];
+        
         <div class="card">
             <div class="card-header">
                 <div>
@@ -22,7 +24,14 @@
 
             <div class="card-controls">
                 @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
-                    <button class="card-delete-button" onclick="deleteClass(@class_.ClassId)"> Delete </button>
+                    <button class="card-button card-view-button" onclick="window.location='/class?class=@class_.ClassId'"> View </button>
+                }
+                @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "student").ToList().Count() > 0 && @Model.Enrolments[i]) {
+                    <button class="card-button card-view-button" onclick="window.location='/class?class=@class_.ClassId'"> View </button>
+                }
+
+                @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
+                    <button class="card-button card-delete-button" onclick="deleteClass(@class_.ClassId)"> Delete </button>
                 }
             </div>
         </div>
@@ -51,7 +60,7 @@
             </select>
 
             <div class="card-controls">
-                <button class="card-add-button" onclick="createNewClass()"> Add </button>
+                <button class="card-button card-add-button" onclick="createNewClass()"> Add </button>
             </div>
         </div>
     }
@@ -59,7 +68,7 @@
 
 @section styles {
     <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/courses.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/classes.css" asp-append-version="true" />
 }
 
 @section scripts {

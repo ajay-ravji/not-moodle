@@ -11,6 +11,7 @@ class DatabaseContext : DbContext {
     public DatabaseContext() {}
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        optionsBuilder.UseLazyLoadingProxies();
         optionsBuilder.UseSqlite($"Data Source=" + Environment.CurrentDirectory + "\\database.db");
     }
 

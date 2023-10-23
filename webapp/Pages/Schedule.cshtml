@@ -1,0 +1,82 @@
+
+@page
+@using System.Security.Claims
+@model ScheduleModel
+@{
+    ViewData["Title"] = "Schedule";
+    ViewData["ContentTitle"] = "Schedule";
+}
+
+<div id="schedule-card">
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <p> @Model.Schedule.Name </p>
+            </div>
+        </div>
+        <p class="card-field-header"> Class </p>
+        <p class="card-field"> @Model.Schedule.Class.Name </p>
+        <p class="card-field-header"> Course </p>
+        <p class="card-field"> @Model.Schedule.Class.Course.Name </p>
+        <p class="card-field-header"> Lecturer </p>
+        <p class="card-field"> @Model.Schedule.Class.Lecturer.Name </p>
+
+        <div class="card-controls"></div>
+    </div>
+</div>
+
+<div id="slot-list">
+    @foreach (var slot in @Model.ScheduleSlotList) {
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <p> @slot.Time </p>
+                </div>
+            </div>
+            <p class="card-field-header"> Student </p>
+            @if (@slot.Student == null) {
+                <p class="card-field"> Nobody! </p>
+            } else {
+                <p class="card-field"> @slot.Student.Name </p>
+            }
+
+            <div class="card-controls">
+                @if (@slot.Student == null && !@Model.UserHasClaimed) {
+                    <button class="card-button card-view-button" onclick="claimSlot(@slot.ScheduleSlotId)"> Claim </button>
+                }
+
+                @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
+                    if (@slot.Student != null) {
+                        <button class="card-button card-view-button" onclick="resetSlot(@slot.ScheduleSlotId)"> Reset </button>
+                    }
+                    <button class="card-button card-delete-button" onclick="deleteSlot(@slot.ScheduleSlotId)"> Delete </button>
+                }
+            </div>
+        </div>
+    }
+
+    @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <p> Add new slot </p>
+                </div>
+            </div>
+            <p class="card-field-header"> Name </p>
+            <input id="slot-time-input" class="card-field-input" type="datetime-local">
+
+            <div class="card-controls">
+                <button class="card-button card-add-button" onclick="createNewSlot(@Model.Schedule.ScheduleId)"> Add </button>
+            </div>
+        </div>
+    }
+</div>
+
+@section styles {
+    <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/schedule.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script src="~/js/schedule.js"></script>   
+}

@@ -20,7 +20,7 @@
 
             <div class="card-controls">
                 @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
-                    <button class="card-delete-button" onclick="deleteCourse(@course.CourseId)"> Delete </button>
+                    <button class="card-button card-delete-button" onclick="deleteCourse(@course.CourseId)"> Delete </button>
                 }
             </div>
         </div>
@@ -37,7 +37,7 @@
             <input id="course-name-input" class="card-field-input" name="name">
             
             <div class="card-controls">
-                <button class="card-add-button" onclick="createNewCourse()"> Add </button>
+                <button class="card-button card-add-button" onclick="createNewCourse()"> Add </button>
             </div>
         </div>
     }

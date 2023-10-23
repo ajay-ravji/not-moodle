@@ -9,35 +9,42 @@
 
 <div id="courses">
     @foreach (var course in @Model.CourseList) {
-        <div class="course">
-            <div class="course-header">
+        <div class="card">
+            <div class="card-header">
                 <div>
                     <p> @course.Name </p>
                 </div>
+            </div>
+            <p class="card-field-header"> Name </p>
+            <p class="card-field"> @course.Name </p>
+
+            <div class="card-controls">
                 @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
-                    <input type="button" class="course-delete-button" onclick="deleteCourse(@course.CourseId)" value="X">
+                    <button class="card-button card-delete-button" onclick="deleteCourse(@course.CourseId)"> Delete </button>
                 }
             </div>
-            <p class="course-name-header"> Name </p>
-            <p class="course-name"> @course.Name </p>
         </div>
     }
 
     @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
-        <div class="course">
-            <div class="course-header">
+        <div class="card">
+            <div class="card-header">
                 <div>
                     <p> Add new course </p>
                 </div>
             </div>
-            <p class="course-name-header"> Name </p>
-            <input id="course-name-input" name="name">
-            <button id="course-add-button" onclick="createNewCourse()"> Add </button>
+            <p class="card-field-header"> Name </p>
+            <input id="course-name-input" class="card-field-input" name="name">
+            
+            <div class="card-controls">
+                <button class="card-button card-add-button" onclick="createNewCourse()"> Add </button>
+            </div>
         </div>
     }
 </div>
 
 @section styles {
+    <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/courses.css" asp-append-version="true" />
 }
 

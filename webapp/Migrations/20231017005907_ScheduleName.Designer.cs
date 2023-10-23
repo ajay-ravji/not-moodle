@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace webapp.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230919030151_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231017005907_ScheduleName")]
+    partial class ScheduleName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,10 @@ namespace webapp.Migrations
 
                     b.Property<int>("LecturerId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ClassId");
 
@@ -79,6 +83,10 @@ namespace webapp.Migrations
                     b.Property<int>("ClassId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("ScheduleId");
 
                     b.HasIndex("ClassId");
@@ -115,6 +123,10 @@ namespace webapp.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
                         .IsRequired()

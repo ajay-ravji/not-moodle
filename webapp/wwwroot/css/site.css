@@ -3,7 +3,8 @@ html {
 }
 body {
     margin: 0;
-    background-image: url('./../images/hex-background.jpg'); 
+    background-image: url('./../images/hex-background.jpg');
+    background-color: #111111; 
 }
 #form-message {
     color: Red;

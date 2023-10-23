@@ -1,0 +1,30 @@
+#class-card {
+    display: grid;
+    padding: 0 10% 0 10%;
+    gap: 50px 50px;
+    grid-template-columns: repeat(3, 1fr);
+    z-index: 0;
+}
+
+#content-grid {
+    margin: 50px 0 0 0;
+
+    display: grid;
+    padding: 0 10% 0 10%;
+    gap: 50px 50px;
+    grid-template-columns: repeat(3, 1fr);
+    z-index: 0;
+}
+
+#schedule-list {
+    grid-column: span 2;
+    display: grid;
+    /* padding: 0 10% 0 10%; */
+    gap: 50px 50px;
+    grid-template-columns: repeat(2, 1fr);
+    z-index: 0;
+}
+
+.card {
+    min-height: 300px;
+}

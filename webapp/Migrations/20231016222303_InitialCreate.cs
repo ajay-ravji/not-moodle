@@ -32,7 +32,8 @@ namespace webapp.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Role = table.Column<string>(type: "TEXT", nullable: false),
                     UserName = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", nullable: false)
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,6 +46,7 @@ namespace webapp.Migrations
                 {
                     ClassId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     CourseId = table.Column<int>(type: "INTEGER", nullable: false),
                     LecturerId = table.Column<int>(type: "INTEGER", nullable: false)
                 },

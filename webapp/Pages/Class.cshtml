@@ -1,0 +1,86 @@
+
+@page
+@using System.Security.Claims
+@model ClassModel
+@{
+    ViewData["Title"] = "Class";
+    ViewData["ContentTitle"] = "Class";
+}
+
+<div id="class-card">
+    <div class="card">
+        <div class="card-header">
+            <div>
+                <p> @Model.Class.Name </p>
+            </div>
+        </div>
+        <p class="card-field-header"> Course </p>
+        <p class="card-field"> @Model.Class.Course.Name </p>
+        <p class="card-field-header"> Lecturer </p>
+        <p class="card-field"> @Model.Class.Lecturer.Name </p>
+
+        <div class="card-controls"></div>
+    </div>
+</div>
+
+<div id="content-grid">
+    <div id="student-list" class="card">
+        <div class="card-header">
+            <div>
+                <p> Students </p>
+            </div>
+        </div>
+
+        @foreach (var student in @Model.StudentList) {
+            <div class="student-entry">
+                <p class="card-list-field"> @student.Name </p>
+            </div>
+
+        }
+    </div>
+
+
+    <div id="schedule-list">
+        @foreach (var schedule in @Model.ScheduleList) {
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <p> @schedule.Name </p>
+                </div>
+            </div>
+
+            <div class="card-controls">
+                <button class="card-button card-view-button" onclick="window.location='/schedule?schedule=@schedule.ScheduleId'"> View </button>
+                @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
+                    <button class="card-button card-delete-button" onclick="deleteSchedule(@schedule.ScheduleId)"> Delete </button>
+                }
+            </div>
+        </div>
+    }
+
+    @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <p> Add new schedule </p>
+                </div>
+            </div>
+            <p class="card-field-header"> Name </p>
+            <input id="schedule-name-input" class="card-field-input" name="name">
+            
+            <div class="card-controls">
+                <button class="card-button card-add-button" onclick="createNewSchedule(@Model.Class.ClassId)"> Add </button>
+            </div>
+        </div>
+    }
+    </div>
+</div>
+
+@section styles {
+    <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/class.css" asp-append-version="true" />
+}
+
+@section scripts {
+    <script src="~/js/class.js"></script>   
+}

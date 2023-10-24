@@ -15,7 +15,7 @@ public class ClassModel : PageModel {
     public List<User> StudentList;
 
     public void OnGet() {
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         int classId;
         if (!Int32.TryParse(HttpContext.Request.Query["class"], out classId)) return;
 

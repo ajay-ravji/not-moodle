@@ -15,7 +15,7 @@ public class CourseController : ControllerBase {
 
         if (json["name"] == null) return Results.StatusCode(400);
 
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         context.Add(new Course{ Name = json["name"] });
         context.SaveChanges();
 
@@ -33,7 +33,7 @@ public class CourseController : ControllerBase {
         int courseId;
         if (!Int32.TryParse(json["id"], out courseId)) return Results.StatusCode(400);
 
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         Course course = context.Courses.Where(x => x.CourseId == courseId).ToList()[0];
         context.Courses.Remove(course);
         context.SaveChanges();

@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 public class Enrolment {
     public int ClassId { get; set; }
     public virtual Class Class { get; set; }

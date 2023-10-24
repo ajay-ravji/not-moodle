@@ -22,7 +22,7 @@ public class SlotController : ControllerBase {
         DateTime time;
         if (!DateTime.TryParse(json["time"], out time)) return Results.StatusCode(400);
 
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         context.Add(new ScheduleSlot{ ScheduleId = scheduleId, Time = time });
         context.SaveChanges();
 
@@ -40,7 +40,7 @@ public class SlotController : ControllerBase {
         int scheduleSlotId;
         if (!Int32.TryParse(json["id"], out scheduleSlotId)) return Results.StatusCode(400);
 
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         ScheduleSlot scheduleSlot = context.ScheduleSlots.Where(x => x.ScheduleSlotId == scheduleSlotId).ToList()[0];
         context.ScheduleSlots.Remove(scheduleSlot);
         context.SaveChanges();
@@ -58,7 +58,7 @@ public class SlotController : ControllerBase {
         int scheduleSlotId;
         if (!Int32.TryParse(json["id"], out scheduleSlotId)) return Results.StatusCode(400);
 
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         ScheduleSlot scheduleSlot = context.ScheduleSlots.Where(x => x.ScheduleSlotId == scheduleSlotId).ToList()[0];
 
         if (scheduleSlot.Student != null) return Results.StatusCode(400);
@@ -86,7 +86,7 @@ public class SlotController : ControllerBase {
         int scheduleSlotId;
         if (!Int32.TryParse(json["id"], out scheduleSlotId)) return Results.StatusCode(400);
 
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         ScheduleSlot scheduleSlot = context.ScheduleSlots.Where(x => x.ScheduleSlotId == scheduleSlotId).ToList()[0];
         scheduleSlot.StudentId = null;
         context.SaveChanges();

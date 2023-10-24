@@ -18,7 +18,7 @@ public class AuthController : ControllerBase {
         if (json["username"] == null) return Results.StatusCode(400);
         if (json["password"] == null) return Results.StatusCode(400);
 
-        DatabaseContext dbContext = new DatabaseContext();
+        DatabaseContext dbContext = new DatabaseContext(DatabaseContext.ProductionDB);
         var users = dbContext.Users.Where(x => x.UserName == json["username"]).ToList();
         if (users.Count == 0) return Results.StatusCode(400);
 
@@ -56,7 +56,7 @@ public class AuthController : ControllerBase {
         if (json["username"] == null) return Results.StatusCode(400);
         if (json["password"] == null) return Results.StatusCode(400);
 
-        DatabaseContext dbContext = new DatabaseContext();
+        DatabaseContext dbContext = new DatabaseContext(DatabaseContext.ProductionDB);
         var users = dbContext.Users.Where(x => x.UserName == json["username"]).ToList();
         if (users.Count == 0) return Results.StatusCode(400);
 

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,6 +16,9 @@
         <a class="navbar-left" href="/"> not Moodle </a>
         <a class="navbar-left" href="/courses"> Courses </a>
         <a class="navbar-left" href="/classes"> Classes </a>
+        @if (((ClaimsIdentity)User.Identity).Claims.Where(c => c.Type == ClaimTypes.Role && c.Value == "lecturer").ToList().Count() > 0) {
+            <a class="navbar-left" href="/reset"> Password Reset </a>
+        }
 
         @if (User.Identity.IsAuthenticated) {
             <div class="navbar-right" id="dropdown">

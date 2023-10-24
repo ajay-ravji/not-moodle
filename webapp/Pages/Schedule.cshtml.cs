@@ -20,7 +20,7 @@ public class ScheduleModel : PageModel {
         Claim claim = identity.FindFirst(ClaimTypes.Role);
         if (claim == null) return;
 
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         int scheduleId;
         if (!Int32.TryParse(HttpContext.Request.Query["schedule"], out scheduleId)) return;
 

@@ -18,7 +18,7 @@ public class ClassesModel : PageModel {
     public List<Course> CourseList;
 
     public void OnGet() {
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         ClassList = context.Classes.ToList();
         LecturerList = context.Users.Where(x => x.Role == "lecturer").ToList();
         CourseList = context.Courses.ToList();

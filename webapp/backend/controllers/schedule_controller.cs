@@ -18,7 +18,7 @@ public class ScheduleController : ControllerBase {
         int classId;
         if (!Int32.TryParse(json["classId"], out classId)) return Results.StatusCode(400);
 
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         context.Add(new Schedule{ Name = json["name"], ClassId = classId});
         context.SaveChanges();
 
@@ -36,7 +36,7 @@ public class ScheduleController : ControllerBase {
         int scheduleId;
         if (!Int32.TryParse(json["id"], out scheduleId)) return Results.StatusCode(400);
 
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         Schedule schedule = context.Schedules.Where(x => x.ScheduleId == scheduleId).ToList()[0];
         context.Schedules.Remove(schedule);
         context.SaveChanges();

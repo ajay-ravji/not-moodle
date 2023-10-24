@@ -22,7 +22,7 @@ public class ClassController : ControllerBase {
         int lecturerId;
         if (!Int32.TryParse(json["lecturerId"], out lecturerId)) return Results.StatusCode(400);
 
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         context.Add(new Class{ Name = json["name"], CourseId = courseId, LecturerId = lecturerId });
         context.SaveChanges();
 
@@ -40,7 +40,7 @@ public class ClassController : ControllerBase {
         int classId;
         if (!Int32.TryParse(json["id"], out classId)) return Results.StatusCode(400);
 
-        DatabaseContext context = new DatabaseContext();
+        DatabaseContext context = new DatabaseContext(DatabaseContext.ProductionDB);
         Class class_ = context.Classes.Where(x => x.ClassId == classId).ToList()[0];
         context.Classes.Remove(class_);
         context.SaveChanges();
